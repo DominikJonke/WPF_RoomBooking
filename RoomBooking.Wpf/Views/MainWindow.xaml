@@ -1,0 +1,31 @@
+﻿<controls:MetroWindow 
+        x:Class="RoomBooking.Wpf.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Height="400" Width="400"
+        MinHeight="300" MinWidth="300"
+        Title="RoomBooking">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Grid.Row="0">
+            <TextBlock>Room:</TextBlock>
+            <ComboBox Height="20" ItemsSource="{Binding Path=Room}" SelectedItem="{Binding Path=SelectedRoom}" DisplayMemberPath="RoomNumber"></ComboBox>
+        </StackPanel>
+
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Booking}" IsReadOnly="True"  AutoGenerateColumns="False" SelectedItem="{Binding SelectedBooking}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="From" Binding="{Binding Path=From, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="To" Binding="{Binding Path=To, UpdateSourceTrigger=PropertyChanged}"/>
+                <DataGridTextColumn Header="Customer" Binding="{Binding Path=Customer.Name, UpdateSourceTrigger=PropertyChanged}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="3" Command="{Binding CmdEditCustomer}" Content="{Binding SelectedBooking.Customer.Name}"/>
+    </Grid>
+</controls:MetroWindow>
